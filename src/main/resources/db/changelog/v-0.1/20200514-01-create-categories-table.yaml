@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20200514-01
+      author: azizi
+      changes:
+        - createTable:
+            tableName: categories
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: category_pkey
+              - column:
+                  name: name
+                  type: VARCHAR(255)

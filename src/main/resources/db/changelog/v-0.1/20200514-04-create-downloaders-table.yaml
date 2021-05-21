@@ -1,0 +1,43 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20200514-04
+      author: azizi
+      changes:
+        - createTable:
+            tableName: downloaders
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: downloader_pkey
+              - column:
+                  name: app_id
+                  type: INT
+              - column:
+                  name: user_id
+                  type: INT
+              - column:
+                  name: downloaded_at
+                  type: TIMESTAMP
+        - addForeignKeyConstraint:
+            baseColumnNames: app_id
+            baseTableName: downloaders
+            constraintName: fk_downloader_app_id
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id
+            referencedTableName: apps
+            validate: true
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: downloaders
+            constraintName: fk_downloader_user_id
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id
+            referencedTableName: users
+            validate: true

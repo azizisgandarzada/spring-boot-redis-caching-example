@@ -1,0 +1,4 @@
+server:
+  port: ${POST_MS_SERVER_PORT:8081}
+  servlet:
+    context-path: /v1/app-store-ms/

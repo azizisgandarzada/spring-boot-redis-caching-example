@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20200514-02
+      author: azizi
+      changes:
+        - createTable:
+            tableName: apps
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: app_pkey
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: author
+                  type: VARCHAR(255)
+              - column:
+                  name: description
+                  type: TEXT
+              - column:
+                  name: category_id
+                  type: INT
+              - column:
+                  name: published_at
+                  type: TIMESTAMP
+        - addForeignKeyConstraint:
+            baseColumnNames: category_id
+            baseTableName: apps
+            constraintName: fk_app_category_id
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id
+            referencedTableName: categories
+            validate: true

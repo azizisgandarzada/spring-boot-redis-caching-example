@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    include:
+      - server
+      - db
+      - logging
+      - redis
+
