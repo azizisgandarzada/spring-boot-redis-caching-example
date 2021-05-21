@@ -1,0 +1,245 @@
+{
+	"info": {
+		"_postman_id": "f385db59-d44e-4eb4-9221-5a7707cd059f",
+		"name": "Spring Boot Redis Caching Example",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Apps",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/v1/app-store-ms/apps?page=0&size=70",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"v1",
+						"app-store-ms",
+						"apps"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "70"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All App Downloaders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/v1/app-store-ms/apps/downloads/:appId?page=0&size=199",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"v1",
+						"app-store-ms",
+						"apps",
+						"downloads",
+						":appId"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "199"
+						}
+					],
+					"variable": [
+						{
+							"key": "appId",
+							"value": "16"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get App Details By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/v1/app-store-ms/apps/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"v1",
+						"app-store-ms",
+						"apps",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "16"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Publish App",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Bigtax\",\n    \"author\": \"Jarred Mante\",\n    \"description\": \"Nobis perspiciatis et eum soluta fuga.\",\n    \"category\": {\n        \"id\": 1\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/v1/app-store-ms/apps",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"v1",
+						"app-store-ms",
+						"apps"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update App",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Bigtax\",\n    \"author\": \"Jarred Mante\",\n    \"description\": \"Nobis perspiciatis et eum soluta fuga.\",\n    \"category\": {\n        \"id\": 1\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/v1/app-store-ms/apps/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"v1",
+						"app-store-ms",
+						"apps",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "16"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Download App",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1804,\n    \"name\": \"Heavy Duty Concrete Knife\",\n    \"price\": 81.02,\n    \"color\": \"pink\",\n    \"category\": \"Beauty, Clothing & Movies\",\n    \"material\": \"Linen\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/v1/app-store-ms/apps/downloading/:appId/:userId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"v1",
+						"app-store-ms",
+						"apps",
+						"downloading",
+						":appId",
+						":userId"
+					],
+					"variable": [
+						{
+							"key": "appId",
+							"value": "16"
+						},
+						{
+							"key": "userId",
+							"value": "199"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete App",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/v1/app-store-ms/apps/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"v1",
+						"app-store-ms",
+						"apps",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "16"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
