@@ -57,9 +57,9 @@ public class AppController {
         return appService.downloadApp(appId, userId);
     }
 
-    @GetMapping("downloads/{appId}")
-    public PageDto<UserDto> getDownloads(@PathVariable Integer appId, Pageable pageable) {
-        return appService.getDownloads(appId, pageable);
+    @GetMapping("downloaders/{appId}")
+    public PageDto<UserDto> getDownloaders(@PathVariable Integer appId, Pageable pageable) {
+        return appService.getDownloaders(appId, pageable);
     }
 
 }

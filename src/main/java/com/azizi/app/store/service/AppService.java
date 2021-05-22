@@ -80,7 +80,7 @@ public class AppService {
         List<Category> categories = createCategories();
         List<User> users = createUsers(faker);
         List<App> apps = createApps(faker, categories);
-        createDownloads(apps, users);
+        createDownloaders(apps, users);
     }
 
     public PageDto<AppDto> getApps(Pageable pageable) {
@@ -138,7 +138,7 @@ public class AppService {
         downloaderRepository.deleteAllByApp(app);
         appRepository.delete(app);
         hashOperations.delete(RedisCacheKeyConstants.APP_HASH_KEY, id);
-        String key = buildDownloadsKey(id);
+        String key = buildDownloadersKey(id);
         redisTemplate.delete(key);
         zSetOperations.remove(RedisCacheKeyConstants.APPS_ZSET_KEY, app.getId());
     }
@@ -147,7 +147,7 @@ public class AppService {
     public Boolean downloadApp(Integer appId, Integer userId) {
         App app = appRepository.findById(appId).orElseThrow(AppNotFoundException::new);
         User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
-        String key = buildDownloadsKey(appId);
+        String key = buildDownloadersKey(appId);
         Long index = listOperations.indexOf(key, user.getId());
         if (index != null && index > -1) {
             return false;
@@ -161,9 +161,9 @@ public class AppService {
         return true;
     }
 
-    public PageDto<UserDto> getDownloads(Integer appId, Pageable pageable) {
+    public PageDto<UserDto> getDownloaders(Integer appId, Pageable pageable) {
         App app = appRepository.findById(appId).orElseThrow(AppNotFoundException::new);
-        String key = buildDownloadsKey(app.getId());
+        String key = buildDownloadersKey(app.getId());
         List<Object> userIds = listOperations.range(key, pageable.getOffset(),
                 pageable.getOffset() + pageable.getPageSize() - 1);
         if (userIds != null) {
@@ -227,7 +227,7 @@ public class AppService {
         return apps;
     }
 
-    private void createDownloads(List<App> apps, List<User> users) {
+    private void createDownloaders(List<App> apps, List<User> users) {
         IntStream.range(0, apps.size()).forEach(i -> {
             int randomEndBetween0And100 = random.nextInt(100);
             App app = apps.get(i);
@@ -238,13 +238,13 @@ public class AppService {
                         .downloadedAt(LocalDateTime.now())
                         .build();
                 downloaderRepository.save(downloader);
-                String key = buildDownloadsKey(app.getId());
+                String key = buildDownloadersKey(app.getId());
                 listOperations.rightPush(key, downloader.getUser().getId());
             });
         });
     }
 
-    private String buildDownloadsKey(Integer appId) {
+    private String buildDownloadersKey(Integer appId) {
         return RedisCacheKeyConstants.DOWNLOADERS_LIST_KEY.replace("{appId}", appId.toString());
     }
 

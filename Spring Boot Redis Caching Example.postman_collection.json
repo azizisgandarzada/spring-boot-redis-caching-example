@@ -42,7 +42,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8081/v1/app-store-ms/apps/downloads/:appId?page=0&size=199",
+					"raw": "http://localhost:8081/v1/app-store-ms/apps/downloaders/:appId?page=0&size=50",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -52,7 +52,7 @@
 						"v1",
 						"app-store-ms",
 						"apps",
-						"downloads",
+						"downloaders",
 						":appId"
 					],
 					"query": [
@@ -62,7 +62,7 @@
 						},
 						{
 							"key": "size",
-							"value": "199"
+							"value": "50"
 						}
 					],
 					"variable": [
